@@ -18,8 +18,8 @@ Specyfikacja wymagań funkcjonalnych w ramach informatyzacji procesu sprzedaży 
 1. [Sprzedający](#ac1) wystawia produkt na aukcję. ([UC1](#uc1))
 2. [Kupujący](#ac2) oferuje kwotę za produkt wyższą od aktualnie najwyższej oferty. ([BR1](#br1))
 3. [Kupujący](#ac2) wygrywa aukcję ([BR2](#br2))
-4. [Kupujący](#ac2) przekazuje należność Sprzedającemu.
-5. [Sprzedający](#ac1) przekazuje produkt Kupującemu.
+4. [Kupujący](#ac2) przekazuje należność Sprzedającemu. ([BR3](#br3))
+5. [Sprzedający](#ac1) przekazuje produkt Kupującemu. ([UC2](#uc2))
 
 **Scenariusze alternatywne:** 
 
@@ -43,17 +43,23 @@ Osoba oferująca towar na aukcji.
 
 Osoba chcąca zakupić produkt na aukcji.
 
+<a id="ac3"></a>
+### AC3: Firma kurierska
+
+Firma pośrednicząca przy przekazywaniu przedmiotów aukcji.
 
 ## Przypadki użycia poziomu użytkownika
 
 ### Aktorzy i ich cele
 
 [Sprzedający](#ac1):
-* [UC1](#uc1): Wystawienie produktu na aukcję
-* ...
+* [UC1](#uc1): Wystawienie produktu na aukcję.
+* [UC2](#uc2): Przekazanie produktu Kupującemu drogą usług kurierskich. 
 
 [Kupujący](#ac2)
-* ...
+* [BR1](#br1): Oferowanie kwoty za produkt wyższej od aktualnie najwyższej oferty.
+* [BR2](#br2): Wygranie lub przegranie aukcji.
+* [BR3](#br3): Przelanie pieniędzy lub zapłata kartą płatniczą. 
 
 ---
 <a id="uc1"></a>
@@ -77,17 +83,39 @@ Osoba chcąca zakupić produkt na aukcji.
 ---
 
 <a id="uc2"></a>
-### UC2: ...
+### UC2: Przekazanie produktu Kupującemu drogą usług kurierskich.
 
-**Aktorzy:** [Sprzedający](#ac1), [Kupujący](#ac2), ...
+**Aktorzy:** [Sprzedający](#ac1), [Kupujący](#ac2), [Firma kurierska](#ac3)
 
 **Scenariusz główny:**
-1. ...
+1. [Kupujący](#ac2) wprowadza adres, na który ma trafić wylicytowany produkt.
+2. [Firma kurierska](#ac3) generuje etykietę przewozową i informuje [Sprzedającego](#ac1) o dacie przyjazdu kuriera.
+3. [Sprzedający](#ac1) przekazuje produkt [Firmie kurierskiej](#ac3).
+4. [Firma kurierska](#ac3) dostarcza produkt [Kupującemu](#ac2).
 
 **Scenariusze alternatywne:** 
 
-1.A. ...
-* 4.A.1. ...
+1.A. Wprowadzony adres jest błędny lub niekompletny.
+* 1.A.1. System informuje o błędnie podanych danych.
+* 1.A.2. Przejdź do kroku 1.
+
+---
+
+<a id="br1"></a>
+### BR1: Oferowanie kwoty za produkt wyższej od aktualnie najwyższej oferty.
+
+**Aktorzy:** [Kupujący](#ac2)
+
+**Scenariusz główny:**
+1. System wyświetla najwyższą ofertę.
+2. [Kupujący](#ac2) wprowadza swoją ofertę.
+3. System werfyfikuje wprowadzoną ofertę.
+
+**Scenariusze alternatywne:** 
+
+1.A. Wprowadzona oferta jest mniejsza od aktuanie najwyższej oferty lub nie jest kwotą.
+* 1.A.1. System informuje o zbyt niskiej lub błędnej ofercie.
+* 1.A.2. Przejdź do kroku 2.
 
 ---
 
